@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:genui/genui.dart';
-import 'package:genui_a2ui/genui_a2ui.dart';
 import 'package:genui_firebase_ai/genui_firebase_ai.dart';
 import 'ChatScreen.dart';
-
+import 'log_cat.dart';
+import 'custom_ai/a2ui_agent_connector.dart';
+import 'custom_ai/a2ui_content_generator.dart';
 class ChatScreenState extends State<ChatScreen> {
   late final A2uiMessageProcessor _a2uiMessageProcessor;
   late final GenUiConversation _genUiConversation;
@@ -12,16 +13,17 @@ class ChatScreenState extends State<ChatScreen> {
 
   // Send a message containing the user's [text] to the agent.
   void _sendMessage(String text) {
-    print(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+text);
+    print("_sendMessage>>>>>>>>>>>>>>>>>>"+text);
+    logCat.info(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+text);
     if (text.trim().isEmpty) return;
     _genUiConversation.sendRequest(UserMessage.text(text));
-    print(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+text);
+    logCat.info(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+text);
     _genUiConversation.conversation.value.forEach((element) {
-      print(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+element.toString());
+      logCat.info(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+element.toString());
       if (element is AiTextMessage) {
-        print(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+element.text);
+        logCat.info(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+element.text);
       }else if (element is UserMessage) {
-        print(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+element.text);
+        logCat.info(">>_sendMessage>>>>>>>>>>>>>>>>>>>"+element.text);
       }
     });
   }
@@ -32,7 +34,7 @@ class ChatScreenState extends State<ChatScreen> {
   void _onSurfaceAdded(SurfaceAdded update) {
     setState(() {
       _surfaceIds.add(update.surfaceId);
-      print(">>_onSurfaceAdded>>>>>>>>>>>>>>>>>>>"+update.surfaceId);
+      logCat.info(">>_onSurfaceAdded>>>>>>>>>>>>>>>>>>>"+update.surfaceId);
     });
   }
 
@@ -40,7 +42,7 @@ class ChatScreenState extends State<ChatScreen> {
   void _onSurfaceDeleted(SurfaceRemoved update) {
     setState(() {
       _surfaceIds.remove(update.surfaceId);
-      print(">>_onSurfaceDeleted>>>>>>>>>>>>>>>>>>>"+update.surfaceId);
+      logCat.info(">>_onSurfaceDeleted>>>>>>>>>>>>>>>>>>>"+update.surfaceId);
     });
   }
 
@@ -53,19 +55,18 @@ class ChatScreenState extends State<ChatScreen> {
     _a2uiMessageProcessor = A2uiMessageProcessor(
       catalogs: [CoreCatalogItems.asCatalog()],
     );
-
     // Create a ContentGenerator to communicate with the LLM.
     // Provide system instructions and the tools from the A2uiMessageProcessor.
-    final contentGenerator = FirebaseAiContentGenerator(
-      catalog: CoreCatalogItems.asCatalog(),
-      systemInstruction: '''
-        You are an expert in creating funny riddles. Every time I give you a word,
-        you should generate UI that displays one new riddle related to that word.
-        Each riddle should have both a question and an answer.
-        ''',
-      // additionalTools: _a2uiMessageProcessor.getTools(),
-    );
-
+    // final contentGenerator = CustomAiContentGenerator(
+    //   catalog: CoreCatalogItems.asCatalog(),
+    //   systemInstruction: '''
+    //     You are an expert in creating funny riddles. Every time I give you a word,
+    //     you should generate UI that displays one new riddle related to that word.
+    //     Each riddle should have both a question and an answer.
+    //     ''',
+    //   // additionalTools: _a2uiMessageProcessor.getTools(),
+    // );
+    final contentGenerator = A2uiContentGenerator(serverUrl: Uri.parse('https://example-files.online-convert.com/document/txt/example.txt'));
     // Create the GenUiConversation to orchestrate everything.
     _genUiConversation = GenUiConversation(
       a2uiMessageProcessor: _a2uiMessageProcessor,
@@ -116,7 +117,7 @@ class ChatScreenState extends State<ChatScreen> {
                   ElevatedButton(
                     onPressed: () {
                       // Send the user's text to the agent.
-                      print(">>_sendMessage>>>>>>>>>>>>>>>>>>>");
+                      logCat.info(">>_sendMessage>>>>>>>>>>>>>>>>>>>");
                       _sendMessage(_textController.text);
                       _textController.clear();
                     },

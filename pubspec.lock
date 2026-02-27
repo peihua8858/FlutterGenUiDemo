@@ -225,7 +225,7 @@ packages:
     source: sdk
     version: "0.0.0"
   freezed_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: freezed_annotation
       sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
@@ -265,7 +265,7 @@ packages:
     source: hosted
     version: "0.7.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
@@ -289,7 +289,7 @@ packages:
     source: hosted
     version: "0.20.2"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: cb09e7dac6210041fad964ed7fbee004f14258b4eca4040f72d1234062ace4c8
@@ -297,7 +297,7 @@ packages:
     source: hosted
     version: "4.11.0"
   json_schema_builder:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_schema_builder
       sha256: "65035d48d028401ad0ffc8c2f173209c7b1441e465a942a0f909070fae33170c"
@@ -337,7 +337,7 @@ packages:
     source: hosted
     version: "5.1.1"
   logging:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logging
       sha256: c8245ada5f1717ed44271ed1c26b8ce85ca3228fd2ffdb75468ab01979309d61
@@ -446,7 +446,7 @@ packages:
     source: hosted
     version: "4.1.8"
   sse_channel:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sse_channel
       sha256: ad85fda353fae12533fd762dbd3ff275e710f216644e39459bf11a138124acad
@@ -502,7 +502,7 @@ packages:
     source: hosted
     version: "1.4.0"
   uuid:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: uuid
       sha256: "1fef9e8e11e2991bb773070d4656b7bd5d850967a2456cfc83cf47925ba79489"
