@@ -57,7 +57,7 @@ class ChatScreenState extends State<ChatScreen> {
     );
     // Create a ContentGenerator to communicate with the LLM.
     // Provide system instructions and the tools from the A2uiMessageProcessor.
-    // final contentGenerator = CustomAiContentGenerator(
+    // final contentGenerator = FirebaseAiContentGenerator(
     //   catalog: CoreCatalogItems.asCatalog(),
     //   systemInstruction: '''
     //     You are an expert in creating funny riddles. Every time I give you a word,
