@@ -141,7 +141,7 @@ class A2aScreenState extends State<A2aScreen> {
       body: Row(
         children: <Widget>[
           ConstrainedBox(
-            constraints: const BoxConstraints(minWidth: 200),
+            constraints: const BoxConstraints(minWidth: 200, maxWidth: 1280),
             child: Column(
               children: <Widget>[
                 Expanded(
@@ -172,6 +172,9 @@ class A2aScreenState extends State<A2aScreen> {
                 key: ValueKey(currentSurfaceId),
                 host: _a2uiMessageProcessor,
                 surfaceId: currentSurfaceId,
+                defaultBuilder: (context) => const Center(
+                  child: Text('No surface available.'),
+                ),
               ),
             ),
           ),

@@ -66,7 +66,7 @@ class A2uiContentGenerator implements ContentGenerator {
         );
       }
 
-      final String responseText = "ssssssssssssssssss";/*await connector.connectAndSend(
+      final String responseText = "version: \"1.0\"\ngroups:\n  app:\n    app_transport: \"serial\"\n    app_codec: \"frame_codec\"\n    app_transformer: \"disable\"\n    app_lua_script_enabled: true\n    app_encoding: \"UTF-8\"\n  serial:\n    serial_requires_codec: true\n    serial_port: \"/dev/ttyS0\" # Update if your serial port is different\n    serial_baud_rate: 9600\n    serial_data_bits: 8\n    serial_parity: \"none\"\n    serial_stop_bits: \"1\"\n    serial_flow_control: \"none\"\n  frame_codec:\n    frame_codec_prefix: \"42 4d\"\n    frame_codec_header_size: 0\n    frame_codec_length_mode: \"u16_be\"\n    frame_codec_length_meaning: \"payload_checksum\" # Length value 0x1C (28) covers 26 bytes payload + 2 bytes checksum\n    frame_codec_checksum_algo: \"sum16_be\" # Assuming 16-bit big-endian sum, adjust if your datasheet specifies a different algorithm\n    frame_codec_checksum_scope: \"prefix_header_length_payload\"\n    frame_codec_tailer_length: 0\n    frame_codec_suffix: \"\"";/*await connector.connectAndSend(
         message,
         clientCapabilities: clientCapabilities,
       );*/
